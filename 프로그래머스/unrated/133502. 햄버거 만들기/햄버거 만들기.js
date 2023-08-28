@@ -12,12 +12,14 @@ function solution(ingredient) {
             answer++;
             if(i !== 0){
                 i = i - 3;
+                console.log(i)
             }
         }else if(i > temp_ingredient.length - 3){
             break;
         }else{
             i++
         }
+        // console.log(temp_ingredient)
         // console.log(temp_ingredient)
         // i++
         // if(i > 100){break;}//임시 조건
