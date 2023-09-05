@@ -7,9 +7,9 @@ function solution(s) {
     //replace 메서드 사용
     // s = s.replace(/0/g, '');
     while(s.length != 1){
-        s.split('').map(i => {if(i == 0){zero_cnt++;}}).join('');
-        s = s.replace(/0/g, '');
-        s = s.length.toString(2)
+        s.split('').map(i => {if(i == 0){zero_cnt++;}}).join('');//0의 갯수를 세고
+        s = s.replace(/0/g, '');//0을 제거
+        s = s.length.toString(2)//길이를 2진변환
         trans_cnt++;
     }
     // s = s.length.toString(2)
