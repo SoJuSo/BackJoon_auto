@@ -10,3 +10,11 @@ function solution(num_list) {
     }
     return num_list
 }
+
+// 다른 분 코드
+// 진짜 간단하면서도 효율적이다...
+// 내장함수, ...을 잘 이용해서 해봐야겠다 나도
+// function solution(num_list) {
+//     const [a, b] = [...num_list].reverse();
+//     return [...num_list, a > b ? (a-b):a*2];
+// }
