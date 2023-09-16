@@ -16,3 +16,7 @@ function solution(my_string, is_suffix) {
     })
     return answer;
 }
+
+//아래와 같은 간단하게 끝내는 방법도 있다
+//return my_string.endsWith(is_suffix) ? 1 : 0;
+//접미사.. 즉 말그대로 문자열에서 끝을 나타내는건데 그걸 체크하는 endsWith메서드가 있었다
