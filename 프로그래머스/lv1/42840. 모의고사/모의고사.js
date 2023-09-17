@@ -65,6 +65,7 @@ function solution(answers) {
         }
     }
     // console.log(one_cnt, ' ', two_cnt, ' ', thr_cnt)
+    // 변수가 많을떄는 잘 바꿨는지 확인하자..
     //무작위로 값을 넣었으므로 오름차순 정렬
     return answer.sort();
 }
