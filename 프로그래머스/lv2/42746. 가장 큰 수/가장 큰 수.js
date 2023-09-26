@@ -6,5 +6,7 @@ function solution(numbers) {
         // console.log(a+b, ' ' , b+a)
         return (b + a) - (a + b)
     }).join("")
-    return answer[0] == '0' ? '0' : answer;//0000 같은 경우 예외처리
+    return (parseInt(answer)===0) ? '0' : answer;
+    // return parseInt(answer) + "";
+    // return answer[0] == '0' ? '0' : answer;//0000 같은 경우 예외처리
 }
