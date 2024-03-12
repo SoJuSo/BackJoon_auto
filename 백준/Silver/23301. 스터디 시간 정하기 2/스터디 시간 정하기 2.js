@@ -11,19 +11,27 @@ let array = new Array(1000).fill(0);
 // let array = [];
 // console.log(input);
 
-for (let i = 0; i < N; i++) {
-  const time = input.shift();
-  for (let j = 0; j < time; j++) {
-    const table = input.shift();
-    for (let l = Number(table.split(" ")[0]); l < Number(table.split(" ")[1]); l++) {
-      if (array[l] === undefined) {
-        array[l] = 1;
-      } else {
-        array[l]++;
-      }
-    }
+// for (let i = 0; i < N; i++) {
+//   const time = input.shift();
+//   for (let j = 0; j < time; j++) {
+//     const table = input.shift();
+//     for (let l = Number(table.split(" ")[0]); l < Number(table.split(" ")[1]); l++) {
+//       if (array[l] === undefined) {
+//         array[l] = 1;
+//       } else {
+//         array[l]++;
+//       }
+//     }
+//   }
+// }
+
+input.forEach((item) => {
+  if (item.length === 1) return;
+  const [from, to] = item.split(" ").map(Number);
+  for (let t = from; t < to; t++) {
+    array[t] += 1;
   }
-}
+});
 
 // console.log(array);
 
