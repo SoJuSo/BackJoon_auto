@@ -31,9 +31,9 @@ for (let i = 0; i < TotalCaseCount; i++) {
 
   for (let j = 0; j < aCounter; j++) {
     for (let k = 0; k < bCounter; k++) {
-      if (currentA[j] <= currentB[bCounter - 1]) {
-        break;
-      }
+      //   if (currentA[j] <= currentB[bCounter - 1]) {
+      //     break;
+      //   }
       if (currentA[j] > currentB[k]) {
         answerCouneter += bCounter - k;
         break;
