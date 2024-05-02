@@ -1,12 +1,10 @@
 function solution(s){
-    let p_count = 0;
-    let y_count = 0;
-
-    for(const a of s){
-        console.log(a)
-        if(a === 'p' || a === 'P') p_count++;
-        if(a === 'y' || a === 'Y') y_count++;
-    }
+    let answer = true;
+    let x = 0, y = 0;
+    s.split('').forEach((val) => {
+        val.toUpperCase() === 'P' && x++;
+        val.toUpperCase() === 'Y' && y++;
+    })
     
-    return p_count === y_count;
+    return x === y;
 }
