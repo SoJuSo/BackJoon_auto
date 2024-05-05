@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { exec } = require("child_process");
 
 const createJSFile = (directory, fileName, content) => {
   const filePath = path.join(directory, `${fileName}.js`);
@@ -8,6 +9,19 @@ const createJSFile = (directory, fileName, content) => {
   if (!fs.existsSync(filePath)) {
     fs.writeFileSync(filePath, content);
     console.log(`파일이 생성되었습니다. 파일 이름 : ${fileName}.js, 위치 : ${directory}`);
+
+    // 파일이 생성된 후에 Visual Studio Code에서 해당 파일을 연다.
+    exec(`code ${filePath}`, (error, _, stderr) => {
+      if (error) {
+        console.error(`Visual Studio Code를 열던 중 오류가 발생했습니다: ${error}`);
+        return;
+      }
+      if (stderr) {
+        console.error(`stderr: ${stderr}`);
+        return;
+      }
+      console.log(`${fileName}.js 파일이 Visual Studio Code에서 열렸습니다.`);
+    });
   } else {
     console.log(`${directory} 위치에 ${fileName}.js 파일이 이미 존재합니다.`);
   }
