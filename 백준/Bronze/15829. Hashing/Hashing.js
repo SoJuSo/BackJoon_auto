@@ -7,11 +7,16 @@ let input = fs.readFileSync(filePath).toString().split(splitPath);
 
 const L = Number(input.shift());
 const word = input[0].split("");
-const primeNumber = 31;
+let primeNumber = 31n;
 
-const answer = [];
+let result = 0n;
+let pow = BigInt(1);
 for (let i = 0; i < L; i++) {
-  answer.push((word[i].charCodeAt() - 96) * primeNumber ** i);
+  result += BigInt(BigInt(word[i].charCodeAt() - 96) * pow);
+  pow *= primeNumber;
 }
 
-console.log(answer.reduce((acc, cur) => acc + cur, 0));
+const M = 1234567891n;
+
+if (result >= M) result %= M;
+console.log(Number(result));
