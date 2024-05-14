@@ -7,17 +7,18 @@ let input = fs.readFileSync(filePath).toString().trim().split(splitPath);
 
 const N = Number(input.shift());
 
-console.log(
-  input
-    .sort((a, b) => {
-      const [Ax, Ay] = a.split(" ");
-      const [Bx, By] = b.split(" ");
+const list = [];
 
-      if (Ax === Bx) {
-        return Ay - By;
-      } else {
-        return Ax - Bx;
-      }
-    })
-    .join("\n")
-);
+input.forEach((val) => {
+  list.push(val.split(" ").map(Number));
+});
+
+list.sort((a, b) => {
+  if (a[0] === b[0]) {
+    return a[1] - b[1];
+  } else {
+    return a[0] - b[0];
+  }
+});
+
+console.log(list.map((val) => val.join(" ")).join("\n"));
