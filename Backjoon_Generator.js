@@ -46,6 +46,6 @@ const content = `//${백준링크}\n
 const fs = require("fs");
 const filePath = process.platform === "linux" ? "/dev/stdin" : "0_example.txt";
 const splitPath = process.platform === "linux" ? "\\n" : "\\r\\n";
-let input = fs.readFileSync(filePath).toString().split(splitPath);`; // 파일에 들어갈 내용
+let input = fs.readFileSync(filePath).toString().trim().split(splitPath);`; // 파일에 들어갈 내용
 
 createJSFile(directory, fileName, content);
