@@ -28,6 +28,6 @@ for (let i = 0; i < M; i++) {
   answer.push(dp[+input[i] - 1 - cur]);
   cur = +input[i];
 }
-answer.push(dp[N - +input[M - 1]]);
+answer.push(dp[N - cur]);
 
-console.log(M === 0 ? dp[N] : answer.reduce((acc, cur) => acc * cur));
+console.log(answer.reduce((acc, cur) => acc * cur));
