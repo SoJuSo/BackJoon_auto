@@ -1,62 +1,61 @@
 // https://www.acmicpc.net/problem/1260
+// 240622
 
-let fs = require("fs");
-// let input = fs.readFileSync("example.txt").toString().split("\n"); //vscode
-let input = fs.readFileSync("/dev/stdin").toString().split("\n"); //백준
+const fs = require("fs");
+const filePath = process.platform === "linux" ? "/dev/stdin" : "0_example.txt";
+const splitPath = process.platform === "linux" ? "\n" : "\r\n";
+let input = fs.readFileSync(filePath).toString().trim().split(splitPath);
 
-// console.log(input);
-//아이디어
-// ---
-// 레퍼런스 참조
-// 인접리스트를 만들고
-// DFS, BFS를 구현한다.
+const [N, M, V] = input.shift().split(" ").map(Number);
+const line = input.map((v) => v.split(" ").map(Number));
+let graph = [...Array(N + 1)].map(() => []);
+let visited = Array.from({ length: N + 1 }, () => 0);
 
-let [N, M, V] = input.shift().split(" ").map(Number);
-// console.log(N, M, V, input);
-const graph = Array.from(Array(N + 1), () => Array(N + 1).fill(false));
-
-for (let i = 0; i < M; i++) {
-  const arr = input[i].split(" ").map(Number);
-  //   console.log(arr);
-  graph[arr[0]][arr[1]] = true;
-  graph[arr[1]][arr[0]] = true;
+for (let [from, to] of line) {
+  graph[from].push(to);
+  graph[to].push(from);
 }
 
-// console.log(graph);
-const d_visited = new Array(N + 1).fill(false);
-const d_answer = [];
+for (let i = 1; i < graph.length; i++) {
+  graph[i].sort((a, b) => a - b);
+}
 
-const DFS = (graph, node) => {
-  d_visited[node] = true;
-  d_answer.push(node);
-  for (let i = 1; i < graph.length; i++) {
-    if (graph[node][i] && !d_visited[i]) {
-      DFS(graph, i);
+const ansDfs = [];
+const ansBfs = [];
+const queue = [];
+
+function dfs(cnt) {
+  if (ansDfs.length === N) return;
+  // 최대 방문 정점 수는 최대 정점 번호보다 같거나 적어야 한다.
+  ansDfs.push(cnt);
+  visited[cnt] = 1;
+  for (let next of graph[cnt]) {
+    if (!visited[next]) {
+      visited[next] = 1;
+      dfs(next);
     }
   }
-  return d_answer;
-};
+}
 
-const b_visited = new Array(N + 1).fill(false);
-const b_answer = [];
-const BFS = (graph, node) => {
-  const queue = [];
-  b_visited[node] = true;
-  b_answer.push(node);
-  queue.push(node);
+dfs(V);
 
+visited = visited.map(() => 0);
+function bfs() {
+  queue.push(V);
+  visited[V] = 1;
   while (queue.length !== 0) {
-    let dequeue = queue.shift();
-    for (let i = 1; i < graph.length; i++) {
-      if (graph[dequeue][i] && !b_visited[i]) {
-        b_visited[i] = true;
-        queue.push(i);
-        b_answer.push(i);
+    const now = queue.shift();
+    ansBfs.push(now);
+    for (let next of graph[now]) {
+      if (!visited[next]) {
+        queue.push(next);
+        visited[next] = 1;
       }
     }
   }
-  return b_answer;
-};
+}
 
-console.log(DFS(graph, V).join(" "));
-console.log(BFS(graph, V).join(" "));
+bfs();
+
+console.log(ansDfs.join(" "));
+console.log(ansBfs.join(" "));
