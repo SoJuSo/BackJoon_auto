@@ -19,13 +19,17 @@ for (let i = 0; i < N; i++) {
   }
 }
 
-console.log(Math.round(sum / N) || 0);
-console.log(input[N - Math.ceil(N / 2)]);
+const answer = [];
+
+answer.push(Math.round(sum / N) || 0);
+answer.push(input[N - Math.ceil(N / 2)]);
 const arr = Object.entries(obj).sort((a, b) => {
   if (a[1] === b[1]) {
     return a[0] - b[0];
   }
   return b[1] - a[1];
 });
-console.log(arr.length === 1 ? arr[0][0] : arr[1][1] === arr[0][1] ? arr[1][0] : arr[0][0]);
-console.log(Math.max(...input) - Math.min(...input));
+answer.push(arr.length === 1 ? arr[0][0] : arr[1][1] === arr[0][1] ? arr[1][0] : arr[0][0]);
+answer.push(Math.max(...input) - Math.min(...input));
+
+console.log(answer.join("\n"));
