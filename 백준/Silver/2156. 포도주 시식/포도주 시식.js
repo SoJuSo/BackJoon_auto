@@ -8,7 +8,7 @@ let input = fs.readFileSync(filePath).toString().trim().split(splitPath);
 const N = +input.shift();
 const list = input.map((v) => +v);
 
-const dp = Array.from(N + 1);
+const dp = [];
 dp[0] = 0;
 dp[1] = list[0];
 if (N > 1) dp[2] = list[0] + list[1];
