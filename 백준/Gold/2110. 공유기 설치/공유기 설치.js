@@ -9,29 +9,30 @@ const [n, c] = input.shift().split(" ").map(Number);
 
 const houses = input.map(Number).sort((a, b) => a - b);
 
-const sol = (N, C, arr) => {
-  let start = 1;
-  let end = arr[N - 1];
+const sol = (num, count, arr) => {
+  let left = 1,
+    right = arr[num - 1];
 
-  while (start <= end) {
-    const mid = Math.floor((start + end) / 2);
-
-    let count = 1;
+  while (left <= right) {
+    let mid = Math.floor((left + right) / 2);
+    let route = 1;
     let prev = arr[0];
-    for (const cur of arr) {
-      if (cur - prev < mid) continue;
-      prev = cur;
-      count += 1;
+
+    for (let i = 0; i < num; i++) {
+      if (arr[i] - prev >= mid) {
+        route++;
+        prev = arr[i];
+      }
     }
 
-    if (count < C) {
-      end = mid - 1;
+    if (route >= count) {
+      left = mid + 1;
     } else {
-      start = mid + 1;
+      right = mid - 1;
     }
   }
 
-  return end;
+  return right;
 };
 
 console.log(sol(n, c, houses));
