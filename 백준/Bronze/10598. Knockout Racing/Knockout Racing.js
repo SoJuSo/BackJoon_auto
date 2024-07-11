@@ -24,7 +24,7 @@ const sol = (n, m, arr, arr2) => {
         if (Math.floor(t / len) % 2 === 0) now = arr[j][0] - (t % len);
         else now = arr[j][1] + (t % len);
       }
-      if (x <= now && now <= y) {
+      if (x <= now && y >= now) {
         cur++;
       }
     }
