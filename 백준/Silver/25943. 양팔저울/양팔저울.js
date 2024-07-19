@@ -32,8 +32,8 @@ const sol = (n, arr) => {
 
   while (diff > 0) {
     if (wei[cur] <= diff) {
-      diff -= wei[cur];
-      cnt++;
+      cnt += Math.floor(diff / wei[cur]);
+      diff = diff % wei[cur];
     } else {
       cur--;
     }
