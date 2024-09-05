@@ -6,14 +6,36 @@ const splitPath = process.platform === "linux" ? "\n" : "\r\n";
 let input = fs.readFileSync(filePath).toString().trim().split(splitPath);
 
 const sol = (str) => {
-  let one = 0,
-    zero = 0;
+  const cur = str.split("");
+  let one = cur.reduce((acc, cur) => (cur === "1" ? acc + 1 : acc), 0) / 2;
+  let zero = cur.reduce((acc, cur) => (cur === "0" ? acc + 1 : acc), 0) / 2;
 
-  str.split("").forEach((val) => {
-    val == 1 ? one++ : zero++;
-  });
+  const checkErase = new Array(cur.length).fill(false);
 
-  return "0".repeat(zero / 2) + "1".repeat(one / 2);
+  for (let i = cur.length - 1; i >= 0; i--) {
+    if (zero === 0) break;
+    if (cur[i] === "0") {
+      checkErase[i] = true;
+      zero--;
+    }
+  }
+
+  for (let i = 0; i < cur.length; i++) {
+    if (one === 0) break;
+    if (cur[i] === "1") {
+      checkErase[i] = true;
+      one--;
+    }
+  }
+
+  let ans = "";
+  for (let i = 0; i < cur.length; i++) {
+    if (!checkErase[i]) {
+      ans += cur[i];
+    }
+  }
+
+  return ans;
 };
 
 console.log(sol(input.shift()));
