@@ -9,17 +9,16 @@ const sol = (num) => {
   // 이거완전...피보나치 + DP
 
   const fibo = (n) => {
-    const result = [0, 1];
+    const result = [0n, 1n];
     for (let i = 2; i <= n; i++) {
       result.push(result[i - 1] + result[i - 2]);
     }
 
-    return result[n];
+    return result;
   };
 
-  const long = fibo(num + 1);
-  const short = fibo(num);
-  return (long + short) * 2;
+  const list = fibo(num + 1);
+  return String((list[num + 1] + list[num]) * 2n);
 };
 
 console.log(sol(+input.shift()));
