@@ -9,20 +9,20 @@ const sol = (arr) => {
   // 아이디어
   // 구현
   const answer = [];
-  for (let i = 0; i < arr.length - 1; i += 2) {
-    const curLen = +arr[i];
-    const curText = arr[i + 1].split(" ").join("").toUpperCase();
-    const temp = [];
+  for (let tc = 0; tc < arr.length - 1; tc += 2) {
+    const curN = +arr[tc];
+    const curText = arr[tc + 1].split(" ").join("").toUpperCase();
 
+    const temp = [];
     let idx = 0;
 
-    for (let a = 0; a < curLen; a++) {
-      for (let b = a; b < curText.length; b += curLen) {
-        temp[b] = curText[idx];
+    for (let i = 0; i < curN; i++) {
+      for (let j = i; j < curText.length; j += curN) {
+        temp[j] = curText[idx];
         idx++;
       }
     }
-    answer.push(temp.join("").trim());
+    answer.push(temp.join(""));
   }
   return answer.join("\n");
 };
